@@ -14,8 +14,6 @@ import Systems
 import SurvivalModels
 import ResamplingMethods
 import EstimationMethods
-import ResamplingMethods
-import EstimationMethods
 
 O = 5
 N = 50                                         #number of iterations
