@@ -1,14 +1,15 @@
--------------------------------------------------------------------------------------
-               Python Particle Probability Hypothesis Density Filter
-                         (python-particle-phd-filter)
--------------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+          Python Particle Probability Hypothesis Density Filter
+                    (python-particle-phd-filter)
+------------------------------------------------------------------------------
 
-This is a Python implementation of the Particle Probability Hypothesis density (PHD) 
-filter described in:
+This is a Python implementation of the Particle Probability Hypothesis 
+Density (PHD) filter described in:
 
 [1] B.-N. Vo, S. Singh, and A. Doucet, “Sequential Monte Carlo implementation 
     of the PHD filter for multi-target tracking,” in Information Fusion, 2003. 
-    Proceedings of the Sixth International Conference of, vol. 2, pp. 792 –799, Jul. 2003.
+    Proceedings of the Sixth International Conference of, vol. 2, pp. 792 –799
+    , Jul. 2003.
 
 Required software packages are:
  - Python 2.7
@@ -24,8 +25,9 @@ the code presented.
 USAGE:
 =====
 
-Execute the python script "RunSimulation.py" from a console/terminal. This will simulate a 
-randomly-generated scene of a varying number of moving targets being tracked in a 2D space.
+Execute the python script "RunSimulation.py" from a console/terminal. 
+This will simulate a randomly-generated scene of a varying number of moving 
+targets being tracked in a 2D space.
 
 RunSimulation.py makes use of the folowing modules:
 - PPHDFilter.py
@@ -55,13 +57,13 @@ LICENCE:
 (c) 2015 Rafael Karrer, Vienna.
 All rights reserved.
 
-    'python-particle-phd-filter' is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+    'python-particle-phd-filter' is free software: you can redistribute 
+    it and/or modify it under the terms of the GNU General Public License 
+    as published by the Free Software Foundation, either version 3 of the 
+    License, or (at your option) any later version.
 
-    'python-particle-phd-filter' is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    'python-particle-phd-filter' is distributed in the hope that it will be 
+    useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 

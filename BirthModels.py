@@ -16,7 +16,7 @@ class PoissonBirth:
 
       particles = particles.reshape( dim.shape[ 0 ], n )
       return np.matrix( particles )
-   
+
    def Weight( self, n ):
       print self.lambda_b
       return  np.ones( n ) * 1.0 / n * self.lambda_b

@@ -7,4 +7,4 @@ class UniformSurvival:
    
    def Evolute( self, x, w ):
       # uniform survival, position of particles is not considered
-      return w * p_s
+      return w * self.p_s
