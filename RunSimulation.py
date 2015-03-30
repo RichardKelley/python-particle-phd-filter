@@ -2,6 +2,8 @@ import numpy as np
 from scipy.stats import multivariate_normal as mv_normal
 from scipy.stats import uniform
 import matplotlib.pyplot as plt
+import os
+import time
 
 import PPHDFilter
 
@@ -16,7 +18,7 @@ import ResamplingMethods
 import EstimationMethods
 
 O = 5
-N = 50                                         #number of iterations
+N = 200                                        #number of iterations
 NO = np.zeros( N+1 )                           # initial number of objects
 lambda_b = 1.0 / N * O                # O objects are born over all iterations
 
@@ -25,7 +27,7 @@ priorModel = PriorModels.NoPrior()
 birthModel = BirthModels.PoissonBirth( system, lambda_b )
 survivalModel = SurvivalModels.UniformSurvival( p_s = 1.0 )
 clutterModel = ClutterModels.PoissonClutter( system, lambda_c = 0.0 )
-sensor = MeasurementModels.XYSensorWithAWGN( system, var_z = 1.0, p_d = 0.98 )
+sensor = MeasurementModels.XYSensorWithAWGN( system, var_z = 3, p_d = 0.98 )
 
 rb = uniform()
 
@@ -62,19 +64,24 @@ for n in range( 0, N ):
    #print n, NO[n]
 
 pphdFilter = PPHDFilter.PPHDFilter()
-pphdFilter.SetParticlesPerObject( 500 )
+pphdFilter.SetParticlesPerObject( 1000 )
 pphdFilter.RegisterTransitionModel( process )
 pphdFilter.RegisterMeasurementModel( sensor )
 pphdFilter.RegisterPriorModel( priorModel )
-pphdFilter.RegisterBirthModel( birthModel, 2000 )
+pphdFilter.RegisterBirthModel( birthModel, 1000 )
 pphdFilter.RegisterSurvivalModel( survivalModel )
 pphdFilter.RegisterClutterModel( clutterModel )
 pphdFilter.RegisterResamplingMethod( ResamplingMethods.SystematicResampling )
+#pphdFilter.RegisterResamplingMethod( ResamplingMethods.RafaelsMethod )
 pphdFilter.RegisterEstimationMethod( EstimationMethods.KMeans )
 #pphdFilter.RegisterEstimationMethod( EstimationMethods.KMeansPlusPlus )
 
 pphdFilter.Initialize()
 
+fig = plt.figure()
+
+plt.show( block=False )
+   
 for n in range( 0, N ):
    # Prediction Step
    pphdFilter.Predict()
@@ -89,11 +96,13 @@ for n in range( 0, N ):
    #x_est = pphdFilter.Estimate()
    
    # Visualize Data
+   plt.clf()
    plt.plot( np.array( pphdFilter.particles[ 0, : ] ).T, np.array( pphdFilter.particles[ 1, : ] ).T, '.' );
    plt.plot( np.array( pphdFilter.measurements[ 0, :] ).T, np.array( pphdFilter.measurements[ 1, : ].T ), 'o' )
    plt.plot( np.array( allObj[0][0,:] ).T, np.array( allObj[0][1,:] ).T )
    plt.plot( np.array( allObj[0][0,n] ).T, np.array( allObj[0][1,n] ).T, 'o' )
    #plt.plot( np.array( x_est[0,:] ).T, np.array( x_est[1,:] ).T, 'x' )
-   plt.xlim( system.GetDimensions()[0,0] , system.GetDimensions()[0,1] )
-   plt.ylim( system.GetDimensions()[0,0] , system.GetDimensions()[0,1] )
-   plt.show(); plt.close()
+   plt.xlim( system.GetDimensions()[0,0] * 0.5 , system.GetDimensions()[0,1] * 1.5 )
+   plt.ylim( system.GetDimensions()[0,0] * 0.5 , system.GetDimensions()[0,1] * 1.5)
+   plt.draw( );
+   time.sleep(0.1)

@@ -13,7 +13,7 @@ class PoissonClutter:
    def Likelihood( self, z ):
       # uniformly distributed clutter
       #return 1.0 * self.lambda_c
-      return 1.0 * self.lambda_c / self.system.GetVolume() * 900 # this is needed because sensor only works in 2 dimensions
+      return 1.0 * self.lambda_c / self.system.GetVolume() * 900 # this is needed because sensor operates only in 2 dimensions
       
    def Sample( self ):
       if( self.lambda_c > 0 ):

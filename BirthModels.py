@@ -1,6 +1,7 @@
 import numpy as np
 from scipy.stats import uniform
 
+# FIXME: this is not Poisson birth! This is Un
 class PoissonBirth:
    def __init__( self, system, lambda_b ):
       self.lambda_b = lambda_b
@@ -11,6 +12,7 @@ class PoissonBirth:
       dim = self.system.GetDimensions()
       
       particles = np.array( [ ] )
+      # FIXME: this is probably slow?
       for i in range( dim.shape[ 0 ] ):
          particles = np.append( particles, self.rb.rvs( n ) * ( dim[ i, 1 ] - dim[ i, 0 ] ) + dim[ i, 0 ] )
 
